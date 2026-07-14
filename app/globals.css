@@ -86,18 +86,18 @@ body {
 }
 
 /*
- * Hero nodule sizing
- * Mobile: mid-size accent (~hero product mark), not full-bleed planet
+ * Hero nodule sizing (2× prior mobile size)
+ * Mobile: large ambient orb; still not full-bleed
  * Do NOT use inset-0 on the frame on phones (that caused full-screen stretch)
  */
 .hero-nodule-frame {
   position: relative;
   flex-shrink: 0;
-  width: 168px;
-  height: 168px;
-  max-width: 46vw;
-  max-height: 46vw;
-  opacity: 0.58;
+  width: 336px;
+  height: 336px;
+  max-width: 88vw;
+  max-height: 88vw;
+  opacity: 0.62;
   overflow: hidden;
 }
 
@@ -112,29 +112,29 @@ body {
 
 @media (min-width: 400px) {
   .hero-nodule-frame {
-    width: 190px;
-    height: 190px;
-    opacity: 0.62;
+    width: 380px;
+    height: 380px;
+    opacity: 0.66;
   }
 }
 
 @media (min-width: 640px) {
   .hero-nodule-frame {
-    width: 220px;
-    height: 220px;
-    max-width: 40vw;
-    max-height: 40vw;
-    opacity: 0.68;
+    width: 440px;
+    height: 440px;
+    max-width: 72vw;
+    max-height: 72vw;
+    opacity: 0.72;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-nodule-frame {
-    width: 260px;
-    height: 260px;
-    max-width: 36vw;
-    max-height: 36vw;
-    opacity: 0.75;
+    width: 520px;
+    height: 520px;
+    max-width: 64vw;
+    max-height: 64vw;
+    opacity: 0.78;
   }
 }
 
@@ -155,14 +155,14 @@ body {
   }
 }
 
-/* Touch devices: always bounded, never full-bleed */
+/* Touch devices: 2× prior caps, still never full-bleed */
 @media (pointer: coarse) {
   .hero-nodule-frame {
-    width: min(200px, 48vw) !important;
-    height: min(200px, 48vw) !important;
-    max-width: 200px !important;
-    max-height: 200px !important;
-    opacity: 0.62 !important;
+    width: min(400px, 88vw) !important;
+    height: min(400px, 88vw) !important;
+    max-width: 400px !important;
+    max-height: 400px !important;
+    opacity: 0.66 !important;
     position: relative !important;
     inset: auto !important;
   }
@@ -170,11 +170,11 @@ body {
 
 @media (pointer: coarse) and (min-width: 640px) {
   .hero-nodule-frame {
-    width: min(240px, 42vw) !important;
-    height: min(240px, 42vw) !important;
-    max-width: 240px !important;
-    max-height: 240px !important;
-    opacity: 0.7 !important;
+    width: min(480px, 78vw) !important;
+    height: min(480px, 78vw) !important;
+    max-width: 480px !important;
+    max-height: 480px !important;
+    opacity: 0.74 !important;
   }
 }
 
