@@ -5,10 +5,8 @@ import { InteractiveNodule } from "@/components/nodule/InteractiveNodule";
 /**
  * Hero energy node.
  *
- * Mobile / touch: fixed tiny accent (never full-bleed — Android often reports
- * wide CSS widths or "desktop site", so we size by max-width breakpoints AND
- * force compact via max() constraints).
- * Desktop: full-bleed cinematic only from lg up with fine pointer.
+ * Mobile / touch: mid-size ambient orb (~170–200px), never full-bleed.
+ * Desktop (fine pointer): full-bleed cinematic.
  */
 export function HeroNodule() {
   return (

@@ -86,17 +86,18 @@ body {
 }
 
 /*
- * Hero nodule — hard size caps for phones (Android S-series / iOS).
- * Do NOT use inset-0 on the orb frame; that stretched it full-screen before.
+ * Hero nodule sizing
+ * Mobile: mid-size accent (~hero product mark), not full-bleed planet
+ * Do NOT use inset-0 on the frame on phones (that caused full-screen stretch)
  */
 .hero-nodule-frame {
   position: relative;
   flex-shrink: 0;
-  width: 72px;
-  height: 72px;
-  max-width: 18vw;
-  max-height: 18vw;
-  opacity: 0.42;
+  width: 168px;
+  height: 168px;
+  max-width: 46vw;
+  max-height: 46vw;
+  opacity: 0.58;
   overflow: hidden;
 }
 
@@ -109,44 +110,39 @@ body {
   display: block;
 }
 
-/* Slightly larger on wider phones, still a small accent */
 @media (min-width: 400px) {
   .hero-nodule-frame {
-    width: 84px;
-    height: 84px;
+    width: 190px;
+    height: 190px;
+    opacity: 0.62;
   }
 }
 
 @media (min-width: 640px) {
   .hero-nodule-frame {
-    width: 100px;
-    height: 100px;
-    max-width: 16vw;
-    max-height: 16vw;
-    opacity: 0.5;
+    width: 220px;
+    height: 220px;
+    max-width: 40vw;
+    max-height: 40vw;
+    opacity: 0.68;
   }
 }
 
-/* Tablets (portrait): still compact */
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-nodule-frame {
-    width: 120px;
-    height: 120px;
-    max-width: 14vw;
-    max-height: 14vw;
-    opacity: 0.55;
+    width: 260px;
+    height: 260px;
+    max-width: 36vw;
+    max-height: 36vw;
+    opacity: 0.75;
   }
 }
 
 /*
- * Desktop cinematic full-bleed ONLY when:
- * - wide viewport AND
- * - fine pointer (mouse) — excludes most phones in landscape / desktop-site mode
+ * Desktop cinematic full-bleed ONLY with fine pointer (mouse),
+ * so Android "desktop site" / landscape still keeps a bounded orb.
  */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-  .hero-nodule-layer {
-    display: block;
-  }
   .hero-nodule-frame {
     position: absolute;
     inset: 0;
@@ -159,14 +155,14 @@ body {
   }
 }
 
-/* Touch phones in landscape: keep orb small even if width > 1024 */
+/* Touch devices: always bounded, never full-bleed */
 @media (pointer: coarse) {
   .hero-nodule-frame {
-    width: min(88px, 20vw) !important;
-    height: min(88px, 20vw) !important;
-    max-width: 88px !important;
-    max-height: 88px !important;
-    opacity: 0.45 !important;
+    width: min(200px, 48vw) !important;
+    height: min(200px, 48vw) !important;
+    max-width: 200px !important;
+    max-height: 200px !important;
+    opacity: 0.62 !important;
     position: relative !important;
     inset: auto !important;
   }
@@ -174,10 +170,11 @@ body {
 
 @media (pointer: coarse) and (min-width: 640px) {
   .hero-nodule-frame {
-    width: min(100px, 16vw) !important;
-    height: min(100px, 16vw) !important;
-    max-width: 100px !important;
-    max-height: 100px !important;
+    width: min(240px, 42vw) !important;
+    height: min(240px, 42vw) !important;
+    max-width: 240px !important;
+    max-height: 240px !important;
+    opacity: 0.7 !important;
   }
 }
 
