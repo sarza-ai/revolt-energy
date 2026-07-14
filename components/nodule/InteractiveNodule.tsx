@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { cn } from "@/lib/cn";
@@ -102,12 +102,35 @@ const VARIANTS: Record<NoduleVariant, VariantConfig> = {
   },
 };
 
+function CameraFit({ mode }: { mode: "full" | "float" }) {
+  const { camera, size } = useThree();
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    const narrow = size.width < 768;
+    if (mode === "full" && narrow) {
+      // Pull back so the orb reads as a hero accent, not a full-screen planet
+      cam.position.set(0, 0.05, 7.2);
+      cam.fov = 36;
+    } else if (mode === "full") {
+      cam.position.set(0, 0.08, 5.1);
+      cam.fov = 38;
+    } else {
+      cam.position.set(0, 0.08, 4.6);
+      cam.fov = 38;
+    }
+    cam.updateProjectionMatrix();
+  }, [camera, size.width, mode]);
+  return null;
+}
+
 function NoduleMesh({
   config,
   nearRef,
+  meshScale = 1,
 }: {
   config: VariantConfig;
   nearRef: React.MutableRefObject<number>;
+  meshScale?: number;
 }) {
   const mesh = useRef<THREE.Mesh>(null);
   const speedMult = useRef(1);
@@ -127,8 +150,8 @@ function NoduleMesh({
   });
 
   return (
-    <mesh ref={mesh} rotation={[config.tilt, 0, 0]}>
-      <sphereGeometry args={[1.7, 80, 80]} />
+    <mesh ref={mesh} rotation={[config.tilt, 0, 0]} scale={meshScale}>
+      <sphereGeometry args={[1.7, 64, 64]} />
       <meshPhysicalMaterial
         map={map}
         roughness={config.roughness}
@@ -162,6 +185,15 @@ export function InteractiveNodule({
   const wrapRef = useRef<HTMLDivElement>(null);
   const nearRef = useRef(0);
   const config = VARIANTS[variant];
+  const [narrow, setNarrow] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const apply = () => setNarrow(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
     const el = wrapRef.current;
@@ -172,7 +204,6 @@ export function InteractiveNodule({
       const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
       const dist = Math.min(1, Math.hypot(nx, ny));
-      // Float orbs are smaller on screen → slightly wider near radius
       const falloff = mode === "full" ? 0.55 : 0.85;
       nearRef.current = Math.max(0, 1 - dist / falloff);
     };
@@ -181,16 +212,14 @@ export function InteractiveNodule({
       nearRef.current = 0;
     };
 
-    // Track over this nodule's box (works with multiple on site)
     el.addEventListener("pointermove", onMove, { passive: true });
     el.addEventListener("pointerleave", onLeave);
-    // Also window so cursor over nearby text still counts when close to orb
     const onWin = (e: PointerEvent) => {
       const rect = el.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dy = (e.clientY - cy) / (rect.height / 2);
+      const dx = (e.clientX - cx) / (rect.width / 2 || 1);
+      const dy = (e.clientY - cy) / (rect.height / 2 || 1);
       const dist = Math.min(1.5, Math.hypot(dx, dy));
       const falloff = mode === "full" ? 0.55 : 1.1;
       nearRef.current = Math.max(0, 1 - dist / falloff);
@@ -205,31 +234,53 @@ export function InteractiveNodule({
     };
   }, [mode]);
 
+  // Smaller mesh when hero is in a constrained mobile box
+  const meshScale = mode === "full" && narrow ? 0.72 : 1;
+
+  // Always keep the sphere fitting the canvas; smaller on float (mobile hero)
+  const effectiveScale =
+    mode === "float" ? (narrow ? 0.75 : 0.85) : meshScale;
+
   return (
     <div
       ref={wrapRef}
       className={cn(
-        mode === "full" ? "absolute inset-0 z-[1]" : "h-full w-full",
+        mode === "full"
+          ? "absolute inset-0 z-[1] h-full w-full"
+          : "relative h-full w-full max-h-full max-w-full",
         className,
       )}
       title="Move near the nodule to slow its spin"
+      style={
+        mode === "float"
+          ? { width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%" }
+          : undefined
+      }
     >
       <Canvas
-        camera={{ position: [0, 0.08, mode === "full" ? 5.1 : 4.6], fov: 38 }}
-        /* Cap pixel ratio on phones for battery / heat */
-        dpr={
-          typeof window !== "undefined" && window.innerWidth < 768
-            ? [1, 1.25]
-            : [1, 1.5]
-        }
+        camera={{
+          position: [0, 0.05, mode === "float" ? 5.4 : 5.1],
+          fov: mode === "float" ? 32 : 38,
+        }}
+        dpr={narrow ? [1, 1.15] : [1, 1.5]}
         gl={{
           antialias: true,
           alpha: true,
           powerPreference: "high-performance",
           failIfMajorPerformanceCaveat: false,
         }}
-        style={{ width: "100%", height: "100%", background: "transparent" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          maxWidth: "100%",
+          maxHeight: "100%",
+          background: "transparent",
+          display: "block",
+        }}
+        // Important: don't let R3F resize beyond parent on mobile
+        resize={{ scroll: false, debounce: 0 }}
       >
+        <CameraFit mode={mode} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[4, 3, 5]} intensity={1.2} />
         <directionalLight
@@ -240,7 +291,11 @@ export function InteractiveNodule({
         <pointLight position={[0, 1.5, 2]} intensity={0.35} color={config.light} />
 
         <Suspense fallback={null}>
-          <NoduleMesh config={config} nearRef={nearRef} />
+          <NoduleMesh
+            config={config}
+            nearRef={nearRef}
+            meshScale={effectiveScale}
+          />
           <Environment preset="city" environmentIntensity={0.35} />
         </Suspense>
       </Canvas>

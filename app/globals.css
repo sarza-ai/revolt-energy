@@ -85,6 +85,102 @@ body {
   min-height: 100dvh;
 }
 
+/*
+ * Hero nodule — hard size caps for phones (Android S-series / iOS).
+ * Do NOT use inset-0 on the orb frame; that stretched it full-screen before.
+ */
+.hero-nodule-frame {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  max-width: 18vw;
+  max-height: 18vw;
+  opacity: 0.42;
+  overflow: hidden;
+}
+
+.hero-nodule-canvas,
+.hero-nodule-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block;
+}
+
+/* Slightly larger on wider phones, still a small accent */
+@media (min-width: 400px) {
+  .hero-nodule-frame {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-nodule-frame {
+    width: 100px;
+    height: 100px;
+    max-width: 16vw;
+    max-height: 16vw;
+    opacity: 0.5;
+  }
+}
+
+/* Tablets (portrait): still compact */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-nodule-frame {
+    width: 120px;
+    height: 120px;
+    max-width: 14vw;
+    max-height: 14vw;
+    opacity: 0.55;
+  }
+}
+
+/*
+ * Desktop cinematic full-bleed ONLY when:
+ * - wide viewport AND
+ * - fine pointer (mouse) — excludes most phones in landscape / desktop-site mode
+ */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .hero-nodule-layer {
+    display: block;
+  }
+  .hero-nodule-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+  }
+}
+
+/* Touch phones in landscape: keep orb small even if width > 1024 */
+@media (pointer: coarse) {
+  .hero-nodule-frame {
+    width: min(88px, 20vw) !important;
+    height: min(88px, 20vw) !important;
+    max-width: 88px !important;
+    max-height: 88px !important;
+    opacity: 0.45 !important;
+    position: relative !important;
+    inset: auto !important;
+  }
+}
+
+@media (pointer: coarse) and (min-width: 640px) {
+  .hero-nodule-frame {
+    width: min(100px, 16vw) !important;
+    height: min(100px, 16vw) !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+  }
+}
+
 .pb-safe {
   padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
 }

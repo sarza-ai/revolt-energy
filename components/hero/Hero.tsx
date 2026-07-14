@@ -13,14 +13,15 @@ export function Hero() {
     >
       <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:50px_50px] opacity-10" />
 
-      {/* Energy flows — lighter on mobile via CSS / canvas sizing */}
-      <div className="absolute inset-0 max-sm:opacity-70">
+      {/* Energy flows — subdued on small screens so the hero stays copy-first */}
+      <div className="absolute inset-0 opacity-40 sm:opacity-60 lg:opacity-100">
         <EdgeEnergy />
       </div>
 
       <HeroNodule />
 
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0f0a]/50 via-transparent to-[#0a0f0a]/95" />
+      {/* Scrim: keep copy readable; orb is only a small accent on mobile */}
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0f0a]/60 via-[#0a0f0a]/25 to-[#0a0f0a] sm:from-[#0a0f0a]/50 sm:via-transparent sm:to-[#0a0f0a]/95" />
 
       <div className="pointer-events-none relative z-10 mx-auto w-full max-w-5xl px-4 pb-10 text-center sm:px-6 sm:pb-16">
         <motion.div
