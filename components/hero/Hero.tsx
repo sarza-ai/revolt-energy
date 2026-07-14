@@ -54,12 +54,14 @@ export function Hero() {
             ReVolt Energy
           </div>
 
-          {/* Larger than original on mobile, clamped so two lines fit short phones */}
-          <h1 className="text-[clamp(1.85rem,8.2vw,2.65rem)] font-bold leading-[1.05] tracking-[-0.035em] text-white sm:mb-5 sm:text-5xl md:text-6xl lg:text-7xl">
-            Australia&apos;s
+          {/* clean-energy hyphen + gradient fade (same treatment mobile and desktop) */}
+          <h1 className="text-[clamp(1.85rem,8.2vw,2.65rem)] font-bold leading-[1.05] tracking-[-0.035em] sm:mb-5 sm:text-5xl md:text-6xl lg:text-7xl">
+            <span className="bg-gradient-to-b from-white via-white to-emerald-200/90 bg-clip-text text-transparent">
+              Australia&apos;s
+            </span>
             <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-              clean energy future
+              clean-energy future
             </span>
           </h1>
         </motion.div>
