@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { stats, networkNodes } from "@/lib/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ConstellationBg } from "./ConstellationBg";
+import { cn } from "@/lib/cn";
+
+/** Mobile shows half the site cards; desktop keeps the full list. */
+const mobileNodeCount = Math.ceil(networkNodes.length / 2);
 
 export function NetworkStrip() {
   const live = networkNodes.filter((n) => n.status === "live").length;
@@ -23,7 +27,7 @@ export function NetworkStrip() {
           />
         </div>
 
-        {/* 2×2 stats on phone — no tall single column */}
+        {/* 2×2 stats on phone */}
         <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
           {[
             { label: "Live nodes", value: String(live) },
@@ -51,6 +55,7 @@ export function NetworkStrip() {
           ))}
         </div>
 
+        {/* Site cards: half on mobile, full list from sm up */}
         <div className="mt-6 overflow-hidden rounded-2xl border border-emerald-500/20 bg-[#0a1411] shadow-[0_8px_32px_rgba(0,0,0,0.45)] sm:mt-10">
           <div className="grid divide-y divide-white/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-5">
             {networkNodes.map((node, i) => (
@@ -60,7 +65,10 @@ export function NetworkStrip() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.03 }}
-                className="group flex items-center justify-between gap-3 bg-[#0a1411] px-3.5 py-3.5 transition hover:bg-emerald-950/80 sm:px-4 sm:py-4"
+                className={cn(
+                  "group items-center justify-between gap-3 bg-[#0a1411] px-3.5 py-3.5 transition hover:bg-emerald-950/80 sm:px-4 sm:py-4",
+                  i < mobileNodeCount ? "flex" : "hidden sm:flex",
+                )}
               >
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-ink group-hover:text-electric">
