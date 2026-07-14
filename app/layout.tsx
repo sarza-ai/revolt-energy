@@ -56,6 +56,14 @@ export const metadata: Metadata = {
     description: brand.description,
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/images/logo-mark.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/images/logo-mark.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+  },
   other: {
     "mobile-web-app-capable": "yes",
   },

@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none" role="img" aria-label="ReVolt Energy">
-  <!-- Mark: black + green battery -->
-  <rect x="2" y="2" width="60" height="60" rx="12" fill="#000000"/>
-  <g transform="translate(32 32) rotate(-32) translate(-32 -32)">
-    <rect x="17" y="15" width="30" height="38" rx="5" stroke="#22c55e" stroke-width="4" fill="#000000"/>
-    <rect x="26" y="9" width="12" height="7" rx="2" fill="#22c55e"/>
-    <rect x="22" y="36" width="20" height="12" rx="2" fill="#166534"/>
-    <path d="M36 20 L26.5 34 H33 L29.5 48 L42 31 H34.5 L36 20 Z" fill="#4ade80"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 64" fill="none" role="img" aria-label="ReVolt Energy">
+  <!-- Battery mark (same geometry as logo-mark.svg, scaled into left box) -->
+  <g transform="translate(0 0)">
+    <circle cx="32" cy="32" r="31" fill="#0a0f0a"/>
+    <path
+      d="M14 42 C10 34, 11 22, 20 15 C28 9, 40 9, 48 16"
+      stroke="url(#logo-orbit-g)"
+      stroke-width="4.5"
+      stroke-linecap="round"
+      fill="none"
+    />
+    <path
+      d="M50 22 C54 30, 53 42, 44 49 C36 55, 24 55, 16 48"
+      stroke="url(#logo-orbit-t)"
+      stroke-width="4.5"
+      stroke-linecap="round"
+      fill="none"
+    />
+    <rect x="24" y="18" width="16" height="28" rx="2.5" stroke="#d1fae5" stroke-width="2.25" fill="none"/>
+    <rect x="28.5" y="14" width="7" height="4.5" rx="1.2" fill="#d1fae5"/>
+    <path
+      d="M34.5 24 L28.5 33.5 H32.2 L30.2 42 L37.5 31.2 H33.5 L34.5 24 Z"
+      fill="url(#logo-bolt)"
+    />
   </g>
 
+  <!-- Wordmark: ReVolt (light) + Energy (green) -->
   <text
     x="76"
     y="41"
@@ -27,4 +44,19 @@
     font-weight="700"
     letter-spacing="-0.02em"
   >Energy</text>
+
+  <defs>
+    <linearGradient id="logo-orbit-g" x1="14" y1="42" x2="48" y2="16" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="logo-orbit-t" x1="50" y1="22" x2="16" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="logo-bolt" x1="30" y1="24" x2="35" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#86efac"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
 </svg>

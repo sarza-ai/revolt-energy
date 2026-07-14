@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- High-contrast black + green favicon: slanted battery + bolt -->
+<!-- Favicon: same battery + orbit mark as site header logo -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="ReVolt">
-  <!-- Solid black tile -->
-  <rect width="64" height="64" rx="12" fill="#000000"/>
+  <circle cx="32" cy="32" r="32" fill="#0a0f0a"/>
 
-  <!-- Slanted battery -->
-  <g transform="translate(32 32) rotate(-32) translate(-32 -32)">
-    <!-- Battery body outline (thick bright green) -->
-    <rect
-      x="17"
-      y="15"
-      width="30"
-      height="38"
-      rx="5"
-      stroke="#22c55e"
-      stroke-width="4"
-      fill="#000000"
-    />
-    <!-- Terminal -->
-    <rect x="26" y="9" width="12" height="7" rx="2" fill="#22c55e"/>
-    <!-- Fill level hint -->
-    <rect x="22" y="36" width="20" height="12" rx="2" fill="#166534"/>
-    <!-- Charging bolt (bold, high contrast) -->
-    <path
-      d="M36 20 L26.5 34 H33 L29.5 48 L42 31 H34.5 L36 20 Z"
-      fill="#4ade80"
-    />
-  </g>
+  <path
+    d="M14 42 C10 34, 11 22, 20 15 C28 9, 40 9, 48 16"
+    stroke="#22c55e"
+    stroke-width="5"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <path
+    d="M50 22 C54 30, 53 42, 44 49 C36 55, 24 55, 16 48"
+    stroke="#14b8a6"
+    stroke-width="5"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <rect x="23.5" y="17" width="17" height="30" rx="2.5" stroke="#ecfdf5" stroke-width="2.5" fill="none"/>
+  <rect x="28" y="13" width="8" height="5" rx="1.2" fill="#ecfdf5"/>
+  <path
+    d="M35 23.5 L28.2 34 H32.4 L30 43.5 L38.5 31.5 H34 L35 23.5 Z"
+    fill="#4ade80"
+  />
 </svg>
