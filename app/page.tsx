@@ -10,10 +10,10 @@ export default function Home() {
     <>
       <Hero />
       <Advantage />
-      {/* Network strip breaks up advantage + pillars so two 4-item grids aren't back-to-back */}
+      {/* Network strip breaks up advantage + grids so two dense blocks aren't back-to-back */}
       <NetworkStrip />
-      <SolutionsHorizontal />
       <LevelCharts />
+      <SolutionsHorizontal />
       <DualCta />
     </>
   );
