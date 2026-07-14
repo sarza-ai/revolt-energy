@@ -45,6 +45,17 @@ const milestones = [
   },
 ];
 
+/** Each chart watches itself so mobile (stacked layout) animates when scrolled into view. */
+function useChartInView() {
+  const ref = useRef<HTMLDivElement>(null);
+  const active = useInView(ref, {
+    once: true,
+    amount: 0.25,
+    margin: "0px 0px -8% 0px",
+  });
+  return { ref, active };
+}
+
 function seriesToPath(
   values: number[],
   width: number,
@@ -86,7 +97,6 @@ function LevelBarChart({
   subtitle,
   unit,
   delay = 0,
-  active,
 }: {
   values: number[];
   labels: string[];
@@ -94,16 +104,17 @@ function LevelBarChart({
   subtitle: string;
   unit: string;
   delay?: number;
-  active: boolean;
 }) {
+  const { ref, active } = useChartInView();
   const max = Math.max(...values);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-      transition={{ duration: 0.55, delay }}
-      className="rounded-3xl border border-emerald-500/20 bg-[#0f1a14]/80 p-6 backdrop-blur-sm"
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay }}
+      className="rounded-2xl border border-emerald-500/20 bg-[#0f1a14]/80 p-5 backdrop-blur-sm sm:rounded-3xl sm:p-6"
     >
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-400">
         {title}
@@ -112,21 +123,24 @@ function LevelBarChart({
 
       <div className="mt-8 flex h-44 items-end gap-1.5 sm:gap-2">
         {values.map((v, i) => {
-          const pct = (v / max) * 100;
+          const pct = Math.max((v / max) * 100, 2);
           return (
             <div
               key={labels[i]}
               className="flex h-full flex-1 flex-col items-center justify-end gap-2"
             >
-              <div className="flex h-[calc(100%-1.25rem)] w-full items-end">
+              <div className="relative flex h-[calc(100%-1.25rem)] w-full items-end overflow-hidden rounded-t-md">
+                {/*
+                  Animate height (not scaleY) — scaleY often fails or finishes
+                  off-screen without a visible grow on mobile WebKit.
+                */}
                 <motion.div
                   className="w-full rounded-t-md bg-gradient-to-t from-emerald-700 via-emerald-500 to-teal-300 shadow-[0_0_20px_rgba(16,185,129,0.25)]"
-                  style={{ height: `${pct}%`, originY: 1 }}
-                  initial={{ scaleY: 0 }}
-                  animate={active ? { scaleY: 1 } : { scaleY: 0 }}
+                  initial={{ height: "0%" }}
+                  animate={active ? { height: `${pct}%` } : { height: "0%" }}
                   transition={{
                     duration: 0.95,
-                    delay: delay + 0.15 + i * 0.07,
+                    delay: delay + 0.12 + i * 0.06,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   title={`${labels[i]}: ${v} ${unit}`}
@@ -161,7 +175,6 @@ function LevelLineChart({
   delay = 0,
   fill = false,
   id = "a",
-  active,
 }: {
   values: number[];
   title: string;
@@ -170,8 +183,8 @@ function LevelLineChart({
   delay?: number;
   fill?: boolean;
   id?: string;
-  active: boolean;
 }) {
+  const { ref, active } = useChartInView();
   const w = 320;
   const h = 160;
   const path = seriesToPath(values, w, h);
@@ -187,7 +200,6 @@ function LevelLineChart({
   const range = maxV - minV || 1;
   const endY = 8 + (h - 16) - ((max - minV) / range) * (h - 16);
 
-  // Build polyline points for more reliable drawing (pathLength can fail on some paths)
   const points = values
     .map((v, i) => {
       const x = 8 + (i / (values.length - 1)) * (w - 16);
@@ -198,10 +210,11 @@ function LevelLineChart({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-      transition={{ duration: 0.55, delay }}
-      className="rounded-3xl border border-emerald-500/20 bg-[#0f1a14]/80 p-6 backdrop-blur-sm"
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay }}
+      className="rounded-2xl border border-emerald-500/20 bg-[#0f1a14]/80 p-5 backdrop-blur-sm sm:rounded-3xl sm:p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
@@ -238,7 +251,6 @@ function LevelLineChart({
             <stop offset="0%" stopColor="rgba(16,185,129,0.35)" />
             <stop offset="100%" stopColor="rgba(16,185,129,0)" />
           </linearGradient>
-          {/* Wipe reveal left → right (more reliable than pathLength for capacity curves) */}
           <clipPath id={clipId}>
             <motion.rect
               x={0}
@@ -248,7 +260,7 @@ function LevelLineChart({
               animate={active ? { width: w } : { width: 0 }}
               transition={{
                 duration: 1.65,
-                delay: delay + 0.15,
+                delay: delay + 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
             />
@@ -278,9 +290,36 @@ function LevelLineChart({
             strokeLinejoin="round"
             style={{ filter: "drop-shadow(0 0 8px rgba(52,211,153,0.6))" }}
           />
-          {/* Keep path too for clean area edge matching */}
-          <path d={path} fill="none" stroke="transparent" />
         </g>
+
+        {/* Fallback pathLength draw for thin lines (helps when clip wipe is subtle) */}
+        <motion.path
+          d={path}
+          fill="none"
+          stroke={`url(#${strokeId})`}
+          strokeWidth="2.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0.85 }}
+          animate={
+            active
+              ? { pathLength: 1, opacity: 1 }
+              : { pathLength: 0, opacity: 0.85 }
+          }
+          transition={{
+            pathLength: {
+              duration: 1.65,
+              delay: delay + 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            },
+            opacity: { duration: 0.2 },
+          }}
+          style={{
+            filter: "drop-shadow(0 0 8px rgba(52,211,153,0.55))",
+            // Clip-group already reveals fill; pathLength is the visible draw for no-fill charts
+            opacity: fill ? 0 : undefined,
+          }}
+        />
 
         <motion.circle
           cx={w - 8}
@@ -309,13 +348,12 @@ function LevelLineChart({
 
 function LevelSteps() {
   const max = Math.max(...capacitySeries);
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.35 });
+  const { ref, active } = useChartInView();
 
   return (
     <div
       ref={ref}
-      className="rounded-3xl border border-emerald-500/20 bg-[#0f1a14]/80 p-6 backdrop-blur-sm lg:col-span-2"
+      className="rounded-2xl border border-emerald-500/20 bg-[#0f1a14]/80 p-5 backdrop-blur-sm sm:rounded-3xl sm:p-6 lg:col-span-2"
     >
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-400">
         Capacity by year
@@ -334,21 +372,16 @@ function LevelSteps() {
               </span>
               <div className="relative h-3 flex-1 overflow-hidden rounded-full bg-emerald-950/80">
                 {/*
-                  Grow with scaleX from the left — same approach that worked
-                  originally; width % alone often skips the transition.
+                  Animate width % (not scaleX) — more reliable on mobile browsers.
                 */}
                 <motion.div
                   className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-emerald-700 via-emerald-500 to-teal-300"
-                  style={{
-                    width: `${pct}%`,
-                    transformOrigin: "left center",
-                    boxShadow: "0 0 12px rgba(16,185,129,0.35)",
-                  }}
-                  initial={{ scaleX: 0 }}
-                  animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+                  style={{ boxShadow: "0 0 12px rgba(16,185,129,0.35)" }}
+                  initial={{ width: "0%" }}
+                  animate={active ? { width: `${pct}%` } : { width: "0%" }}
                   transition={{
                     duration: 0.85,
-                    delay: 0.08 + i * 0.07,
+                    delay: 0.06 + i * 0.06,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 />
@@ -369,8 +402,10 @@ function LevelSteps() {
 
 export function LevelCharts() {
   const sectionRef = useRef<HTMLElement>(null);
-  // Fire as soon as section enters view (first visit / first scroll to it)
-  const active = useInView(sectionRef, { once: true, amount: 0.15 });
+  const milestonesActive = useInView(sectionRef, {
+    once: true,
+    amount: 0.12,
+  });
 
   return (
     <section
@@ -378,7 +413,10 @@ export function LevelCharts() {
       id="growth"
       className="relative bg-[#0a0f0a] py-10 sm:py-16 lg:py-28"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(16,185,129,0.08),transparent_55%)]" />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(16,185,129,0.08),transparent_55%)]"
+        aria-hidden
+      />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -392,7 +430,11 @@ export function LevelCharts() {
             <motion.div
               key={m.year}
               initial={{ opacity: 0, y: 16 }}
-              animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              animate={
+                milestonesActive
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 16 }
+              }
               transition={{ delay: i * 0.08 }}
               className="rounded-xl border border-emerald-500/15 bg-emerald-950/30 p-3 sm:rounded-2xl sm:p-4"
             >
@@ -414,8 +456,7 @@ export function LevelCharts() {
             subtitle="Potential MW online by calendar year"
             unit="MW"
             fill
-            delay={0.1}
-            active={active}
+            delay={0.05}
           />
           <LevelBarChart
             values={nodesSeries}
@@ -423,8 +464,7 @@ export function LevelCharts() {
             title="Live node count"
             subtitle="Modular sites projected online"
             unit="nodes"
-            delay={0.15}
-            active={active}
+            delay={0.05}
           />
           <LevelLineChart
             id="revenue"
@@ -432,8 +472,7 @@ export function LevelCharts() {
             title="Commercial intensity"
             subtitle="Relative portfolio index (illustrative)"
             unit="idx"
-            delay={0.2}
-            active={active}
+            delay={0.05}
           />
           <LevelSteps />
         </div>
