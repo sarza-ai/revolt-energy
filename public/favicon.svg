@@ -1,47 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- High-contrast favicon: slanted battery + charge bolt -->
+<!-- High-contrast black + green favicon: slanted battery + bolt -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="ReVolt">
-  <defs>
-    <linearGradient id="body" x1="14" y1="12" x2="50" y2="52" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#34d399"/>
-      <stop offset="1" stop-color="#0d9488"/>
-    </linearGradient>
-    <linearGradient id="bolt" x1="28" y1="18" x2="40" y2="46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ecfdf5"/>
-      <stop offset="1" stop-color="#a7f3d0"/>
-    </linearGradient>
-  </defs>
+  <!-- Solid black tile -->
+  <rect width="64" height="64" rx="12" fill="#000000"/>
 
-  <!-- Solid dark plate so it reads on light browser chrome -->
-  <rect width="64" height="64" rx="14" fill="#042f2e"/>
-
-  <!-- Slanted battery group -->
-  <g transform="translate(32 32) rotate(-28) translate(-32 -32)">
-    <!-- Outer body -->
+  <!-- Slanted battery -->
+  <g transform="translate(32 32) rotate(-32) translate(-32 -32)">
+    <!-- Battery body outline (thick bright green) -->
     <rect
-      x="18"
-      y="16"
-      width="28"
-      height="36"
-      rx="4"
-      fill="url(#body)"
+      x="17"
+      y="15"
+      width="30"
+      height="38"
+      rx="5"
+      stroke="#22c55e"
+      stroke-width="4"
+      fill="#000000"
     />
-    <!-- Inner inset -->
-    <rect
-      x="21.5"
-      y="19.5"
-      width="21"
-      height="29"
-      rx="2.5"
-      fill="#064e3b"
-    />
-    <!-- Positive terminal (top of battery, still readable when rotated) -->
-    <rect x="27" y="11" width="10" height="6" rx="2" fill="#6ee7b7"/>
-
-    <!-- Charging bolt -->
+    <!-- Terminal -->
+    <rect x="26" y="9" width="12" height="7" rx="2" fill="#22c55e"/>
+    <!-- Fill level hint -->
+    <rect x="22" y="36" width="20" height="12" rx="2" fill="#166534"/>
+    <!-- Charging bolt (bold, high contrast) -->
     <path
-      d="M35.5 22 L27.5 34.5 H32.8 L30.2 45 L40.5 31.2 H35.2 L35.5 22 Z"
-      fill="url(#bolt)"
+      d="M36 20 L26.5 34 H33 L29.5 48 L42 31 H34.5 L36 20 Z"
+      fill="#4ade80"
     />
   </g>
 </svg>
