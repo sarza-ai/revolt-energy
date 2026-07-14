@@ -16,14 +16,16 @@ export function Hero() {
       id="hero"
       className="relative overflow-hidden bg-[#0a0f0a] pt-14 sm:pt-16 lg:flex lg:min-h-screen-safe lg:items-center lg:justify-center lg:pt-20"
     >
-      {/* Dot grid — lighter on phone */}
       <div
         className="absolute inset-0 opacity-[0.1] [background-size:28px_28px] bg-[radial-gradient(#10b981_1px,transparent_1px)] sm:opacity-10 sm:[background-size:50px_50px]"
         aria-hidden
       />
 
-      {/* Particles only from tablet up — saves battery & reduces visual noise on phones */}
-      <div className="absolute inset-0 hidden opacity-55 sm:block lg:opacity-100" aria-hidden>
+      {/* Energy particles on all sizes (EdgeEnergy tunes mobile density) */}
+      <div
+        className="absolute inset-0 z-[3] opacity-70 sm:opacity-80 lg:opacity-100"
+        aria-hidden
+      >
         <EdgeEnergy />
       </div>
 
@@ -35,15 +37,10 @@ export function Hero() {
       </div>
 
       <div
-        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0f0a]/25 via-transparent to-[#0a0f0a] lg:from-[#0a0f0a]/50 lg:to-[#0a0f0a]/95"
+        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0f0a]/20 via-transparent to-[#0a0f0a] lg:from-[#0a0f0a]/50 lg:to-[#0a0f0a]/95"
         aria-hidden
       />
 
-      {/*
-        Mobile composition (default):
-        badge → headline → nodule → proof → full-width CTAs
-        No min-height centering. No empty mid-screen void.
-      */}
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-5 pb-9 pt-2 text-center sm:px-6 sm:pb-14 sm:pt-4 lg:pointer-events-none lg:pb-16 lg:pt-0">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -60,17 +57,17 @@ export function Hero() {
             Australia&apos;s
             <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-              clean-energy future
+              clean energy future
             </span>
           </h1>
         </motion.div>
 
-        {/* In-flow nodule — primary visual on phones / tablets */}
+        {/* In-flow nodule: overflow visible so sphere edges are not cut off */}
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="pointer-events-auto relative my-1 sm:my-3 lg:hidden"
+          className="pointer-events-auto relative my-0 sm:my-2 lg:hidden"
         >
           <div className="hero-nodule-frame hero-nodule-frame-mobile">
             <InteractiveNodule
@@ -80,7 +77,7 @@ export function Hero() {
             />
           </div>
           <div
-            className="pointer-events-none absolute inset-x-10 bottom-0 -z-10 h-12 rounded-full bg-emerald-500/35 blur-2xl"
+            className="pointer-events-none absolute inset-x-8 bottom-2 -z-10 h-14 rounded-full bg-emerald-500/30 blur-2xl"
             aria-hidden
           />
         </motion.div>
@@ -93,7 +90,7 @@ export function Hero() {
         >
           <p className="mx-auto mb-5 max-w-[22rem] text-[0.95rem] leading-snug text-gray-300 sm:mb-8 sm:max-w-2xl sm:text-lg sm:leading-relaxed md:text-xl">
             <span className="sm:hidden">
-              Decentralised BESS infrastructure — clean power generated, stored
+              Decentralised BESS infrastructure. Clean power generated, stored
               and monetised at the edge.
             </span>
             <span className="hidden sm:inline">
@@ -104,7 +101,6 @@ export function Hero() {
             </span>
           </p>
 
-          {/* Full-width stack on phone — thumb-friendly primary actions */}
           <div className="pointer-events-auto mx-auto flex w-full flex-col gap-2.5 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
             <a
               href="#solutions"

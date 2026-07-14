@@ -21,7 +21,7 @@ export function SolutionsHorizontal() {
         <SectionHeading
           eyebrow="Clean Energy Infrastructure Suite"
           title="Four pillars. One network."
-          body="Generation, storage, trading, and the AI orchestration layer that binds them — one suite for Australia's edge."
+          body="Generation, storage, trading, and the AI orchestration layer that binds them. One suite for Australia's edge."
         />
 
         <div className="mt-6 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:mt-16 lg:grid-cols-4 lg:gap-6">

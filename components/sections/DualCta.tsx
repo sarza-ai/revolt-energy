@@ -28,7 +28,7 @@ export function DualCta() {
               Host a clean-energy node
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted sm:mt-3 sm:text-base">
-              Land, load, grid access, solar potential or EV demand — partner with
+              Land, load, grid access, solar potential or EV demand. Partner with
               ReVolt to turn underutilised sites into productive infrastructure.
             </p>
             <Button
@@ -55,7 +55,7 @@ export function DualCta() {
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted sm:mt-3 sm:text-base">
               Modular BESS assets designed to be scalable, investable and
-              revenue-generating — backed by generation, trading and AI
+              revenue-generating, backed by generation, trading and AI
               orchestration.
             </p>
             <Button

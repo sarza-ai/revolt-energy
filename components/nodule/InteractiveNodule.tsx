@@ -108,15 +108,15 @@ function CameraFit({ mode }: { mode: "full" | "float" }) {
     const cam = camera as THREE.PerspectiveCamera;
     const narrow = size.width < 768;
     if (mode === "full" && narrow) {
-      // Pull back so the orb reads as a hero accent, not a full-screen planet
       cam.position.set(0, 0.05, 7.2);
       cam.fov = 36;
     } else if (mode === "full") {
       cam.position.set(0, 0.08, 5.1);
       cam.fov = 38;
     } else {
-      cam.position.set(0, 0.08, 4.6);
-      cam.fov = 38;
+      // Float (mobile hero): pull back so full sphere + soft edge fit the box
+      cam.position.set(0, 0.06, narrow ? 6.4 : 5.8);
+      cam.fov = narrow ? 34 : 36;
     }
     cam.updateProjectionMatrix();
   }, [camera, size.width, mode]);
@@ -234,12 +234,12 @@ export function InteractiveNodule({
     };
   }, [mode]);
 
-  // Full-bleed desktop hero mesh; float mode fills the mobile frame tightly
+  // Full-bleed desktop hero mesh
   const meshScale = mode === "full" && narrow ? 0.72 : 1;
 
-  // Float (mobile hero): fill the frame so the orb reads large on phones
+  // Float (mobile): keep scale under 1 so edges aren't clipped by the canvas
   const effectiveScale =
-    mode === "float" ? (narrow ? 0.92 : 0.88) : meshScale;
+    mode === "float" ? (narrow ? 0.78 : 0.82) : meshScale;
 
   return (
     <div
@@ -259,8 +259,8 @@ export function InteractiveNodule({
     >
       <Canvas
         camera={{
-          position: [0, 0.05, mode === "float" ? 5.4 : 5.1],
-          fov: mode === "float" ? 32 : 38,
+          position: [0, 0.05, mode === "float" ? 6.4 : 5.1],
+          fov: mode === "float" ? 34 : 38,
         }}
         dpr={narrow ? [1, 1.15] : [1, 1.5]}
         gl={{

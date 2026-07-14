@@ -123,8 +123,8 @@ export function EdgeEnergy() {
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onPointer, { passive: true });
 
-    // Seed — fewer particles on mobile
-    const seedCount = isMobile() ? 12 : 24;
+    // Seed: keep mobile energetic enough to read on phones
+    const seedCount = isMobile() ? 20 : 24;
     for (let i = 0; i < seedCount; i++) {
       const p = spawnFromEdge(w, h, mx, my);
       p.life = Math.random() * p.maxLife;
@@ -134,24 +134,25 @@ export function EdgeEnergy() {
     const tick = () => {
       ctx.clearRect(0, 0, w, h);
 
-      // Corner / edge energy flares (half intensity via drawEdgeFlare)
+      // Edge energy flares
       drawEdgeFlare(ctx, 0, h * 0.5, 1, 0, w * 0.28); // left
       drawEdgeFlare(ctx, w, h * 0.5, -1, 0, w * 0.28); // right
       drawEdgeFlare(ctx, w * 0.5, 0, 0, 1, h * 0.22); // top
       drawEdgeFlare(ctx, w * 0.5, h, 0, -1, h * 0.22); // bottom
 
-      // Spawn — aimed at pointer; lighter on phones
-      const maxParticles = isMobile() ? 22 : 45;
-      const spawnChance = isMobile() ? 0.08 : 0.14;
+      // Mobile: more particles so the "energy coming in" is obvious
+      const maxParticles = isMobile() ? 36 : 45;
+      const spawnChance = isMobile() ? 0.16 : 0.14;
       if (particles.length < maxParticles && Math.random() < spawnChance) {
         particles.push(spawnFromEdge(w, h, mx, my));
       }
-      if (!isMobile() && Math.random() < 0.03) {
+      if (Math.random() < (isMobile() ? 0.05 : 0.03)) {
         particles.push(spawnFromEdge(w, h, mx, my));
       }
 
+      // On mobile the nodule sits higher in the hero, not dead center
       const cx = w * 0.5;
-      const cy = h * 0.5;
+      const cy = isMobile() ? h * 0.32 : h * 0.5;
 
       particles = particles.filter((p) => {
         p.life += 1;
@@ -184,7 +185,9 @@ export function EdgeEnergy() {
         const distToTarget = Math.hypot(p.x - gx, p.y - gy);
         const lifeT = p.life / p.maxLife;
         const nearFade = distToTarget < 100 ? distToTarget / 100 : 1;
-        const alpha = Math.max(0, (1 - lifeT) * nearFade * 0.525);
+        // Brighter on mobile so energy reads clearly on small screens
+        const alphaBoost = isMobile() ? 0.72 : 0.525;
+        const alpha = Math.max(0, (1 - lifeT) * nearFade * alphaBoost);
 
         if (alpha <= 0.02 || p.life >= p.maxLife || distToTarget < 18) {
           return false;

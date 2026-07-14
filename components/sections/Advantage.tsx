@@ -7,7 +7,7 @@ const items = [
   {
     icon: Leaf,
     title: "Nature-Powered Design",
-    desc: "Organic-inspired nodules that sit lightly on the landscape — infrastructure that feels native to Australia.",
+    desc: "Organic-inspired nodules that sit lightly on the landscape, infrastructure that feels native to Australia.",
   },
   {
     icon: BatteryCharging,

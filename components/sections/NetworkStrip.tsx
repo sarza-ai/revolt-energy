@@ -18,7 +18,7 @@ export function NetworkStrip() {
           <SectionHeading
             eyebrow="Live network pulse"
             title="A constellation of clean-energy nodes"
-            body="Illustrative portfolio view of edge assets across Australia — each node a modular piece of sovereign energy infrastructure."
+            body="Illustrative portfolio view of edge assets across Australia. Each node is a modular piece of sovereign energy infrastructure."
             align="center"
           />
         </div>

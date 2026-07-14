@@ -26,7 +26,7 @@ export function AgentWidget() {
       id: "welcome",
       role: "assistant",
       content:
-        "Hi — I'm the ReVolt site assistant. Ask about BESS, partners, investors, solutions, or how to get in touch.",
+        "Hi. I'm the ReVolt site assistant. Ask about BESS, partners, investors, solutions, or how to get in touch.",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -70,7 +70,7 @@ export function AgentWidget() {
         };
         const reply =
           data.reply ||
-          "Sorry — I couldn't answer that. Try the contact form.";
+          "Sorry, I couldn't answer that. Try the contact form.";
         setSource(data.source ?? null);
         setMessages((m) => [
           ...m,
