@@ -176,7 +176,7 @@ export function InquiryForm() {
                 <select
                   value={data.siteType}
                   onChange={(e) => update("siteType", e.target.value)}
-                  className="w-full rounded-xl border border-border bg-navy-900 px-4 py-3 text-sm text-ink outline-none focus:border-electric/50"
+                  className="w-full rounded-xl border border-border bg-navy-900 px-4 py-3 text-base text-ink outline-none focus:border-electric/50 sm:text-sm"
                 >
                   <option value="">Select…</option>
                   {partnerTypes.map((t) => (
@@ -209,7 +209,7 @@ export function InquiryForm() {
                 <select
                   value={data.capitalRange}
                   onChange={(e) => update("capitalRange", e.target.value)}
-                  className="w-full rounded-xl border border-border bg-navy-900 px-4 py-3 text-sm text-ink outline-none focus:border-electric/50"
+                  className="w-full rounded-xl border border-border bg-navy-900 px-4 py-3 text-base text-ink outline-none focus:border-electric/50 sm:text-sm"
                 >
                   <option value="">Select…</option>
                   <option value="<$5M">&lt; $5M</option>
@@ -243,7 +243,7 @@ export function InquiryForm() {
               value={data.message}
               onChange={(e) => update("message", e.target.value)}
               rows={4}
-              className="w-full resize-none rounded-xl border border-border bg-navy-900 px-4 py-3 text-sm text-ink outline-none focus:border-electric/50"
+              className="w-full resize-none rounded-xl border border-border bg-navy-900 px-4 py-3 text-base text-ink outline-none focus:border-electric/50 sm:text-sm"
               placeholder="Tell us what you're building toward…"
             />
           </label>
@@ -316,7 +316,7 @@ function Field({
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border border-border bg-navy-900 px-4 py-3 text-sm text-ink outline-none focus:border-electric/50"
+        className="w-full rounded-xl border border-border bg-navy-900 px-4 py-3 text-base text-ink outline-none focus:border-electric/50 sm:text-sm"
       />
     </label>
   );

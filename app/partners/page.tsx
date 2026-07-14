@@ -12,29 +12,27 @@ export const metadata: Metadata = {
 
 export default function PartnersPage() {
   return (
-    <div className="relative overflow-hidden pt-24 pb-20">
+    <div className="relative overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-20">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Hero: headline + nodule overlaid on this section */}
-        <section className="relative min-h-[min(70vh,560px)] overflow-hidden rounded-3xl border border-emerald-500/15 bg-gradient-to-br from-[#0f1a14] via-[#0a0f0a] to-[#0a1210]">
-          {/* Nodule sits over the hero panel */}
-          <div className="pointer-events-none absolute inset-0 z-[1]">
+        {/* Hero: headline + nodule (nodule muted on small screens for readability) */}
+        <section className="relative min-h-[min(70dvh,560px)] overflow-hidden rounded-2xl border border-emerald-500/15 bg-gradient-to-br from-[#0f1a14] via-[#0a0f0a] to-[#0a1210] sm:rounded-3xl">
+          <div className="pointer-events-none absolute inset-0 z-[1] opacity-40 sm:opacity-100">
             <div className="pointer-events-auto absolute inset-y-0 right-0 w-full sm:w-[58%] lg:w-[52%]">
               <InteractiveNodule variant="partners" mode="float" />
             </div>
           </div>
 
-          {/* Soft vignette so type stays readable over the orb */}
-          <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-[#0a0f0a] via-[#0a0f0a]/85 to-transparent sm:via-[#0a0f0a]/70" />
-          <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-[#0a0f0a]/90 via-transparent to-[#0a0f0a]/40" />
+          <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-[#0a0f0a] via-[#0a0f0a]/90 to-[#0a0f0a]/40 sm:via-[#0a0f0a]/70 sm:to-transparent" />
+          <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-[#0a0f0a]/95 via-transparent to-[#0a0f0a]/50" />
 
-          <div className="relative z-10 flex min-h-[min(70vh,560px)] max-w-xl flex-col justify-center px-6 py-14 sm:px-10 lg:px-12">
+          <div className="relative z-10 flex min-h-[min(70dvh,560px)] max-w-xl flex-col justify-center px-5 py-12 sm:px-10 sm:py-14 lg:px-12">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400">
               Partners
             </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl glow-text">
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl md:text-5xl glow-text">
               Accelerate Australia&apos;s clean energy transition with us
             </h1>
-            <p className="mt-4 text-lg text-muted">
+            <p className="mt-4 text-base text-muted sm:text-lg">
               ReVolt works with EPC developers, property owners, commercial and
               industrial sites, airports, data centre builders and operators, and
               local councils to identify, develop and deploy decentralised

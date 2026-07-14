@@ -216,8 +216,18 @@ export function InteractiveNodule({
     >
       <Canvas
         camera={{ position: [0, 0.08, mode === "full" ? 5.1 : 4.6], fov: 38 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        /* Cap pixel ratio on phones for battery / heat */
+        dpr={
+          typeof window !== "undefined" && window.innerWidth < 768
+            ? [1, 1.25]
+            : [1, 1.5]
+        }
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+          failIfMajorPerformanceCaveat: false,
+        }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
         <ambientLight intensity={0.5} />

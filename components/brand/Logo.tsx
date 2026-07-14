@@ -39,7 +39,7 @@ export function Logo({
         alt="ReVolt Energy"
         width={180}
         height={40}
-        className="h-8 w-auto sm:h-9"
+        className="h-7 w-auto max-w-[min(52vw,200px)] object-contain object-left sm:h-9 sm:max-w-none"
       />
     );
 

@@ -6,6 +6,8 @@ import { brand } from "@/lib/content";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
+export { viewport } from "./viewport";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,6 +34,15 @@ export const metadata: Metadata = {
     "clean energy infrastructure",
     "ReVolt Energy",
   ],
+  applicationName: brand.name,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: brand.name,
+  },
+  formatDetection: {
+    telephone: false,
+  },
   openGraph: {
     title: brand.name,
     description: brand.description,
@@ -45,6 +56,9 @@ export const metadata: Metadata = {
     description: brand.description,
   },
   robots: { index: true, follow: true },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export default function RootLayout({
@@ -59,7 +73,7 @@ export default function RootLayout({
       lang="en-AU"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-navy-950 text-ink">
+      <body className="flex min-h-dvh flex-col bg-navy-950 text-ink antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

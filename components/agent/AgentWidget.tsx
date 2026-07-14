@@ -99,7 +99,8 @@ export function AgentWidget() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "fixed bottom-5 right-5 z-[60] flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition",
+          "fixed z-[60] flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition",
+          "bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))]",
           "bg-gradient-to-br from-emerald-500 to-teal-600 text-white",
           "hover:shadow-[0_0_32px_rgba(16,185,129,0.45)]",
           open && "ring-2 ring-emerald-300/50",
@@ -118,8 +119,15 @@ export function AgentWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-5 z-[60] flex w-[min(100vw-1.5rem,400px)] flex-col overflow-hidden rounded-3xl border border-emerald-500/25 bg-[#0a120f]/95 shadow-2xl backdrop-blur-xl"
-            style={{ height: "min(70vh, 560px)" }}
+            className={cn(
+              "fixed z-[60] flex flex-col overflow-hidden rounded-3xl border border-emerald-500/25 bg-[#0a120f]/95 shadow-2xl backdrop-blur-xl",
+              /* Mobile: near full-width panel above the FAB; desktop: compact card */
+              "inset-x-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] sm:inset-x-auto sm:right-[max(1.25rem,env(safe-area-inset-right))] sm:left-auto sm:w-[min(100vw-1.5rem,400px)]",
+            )}
+            style={{
+              height: "min(70dvh, 560px)",
+              maxHeight: "calc(100dvh - 8rem - env(safe-area-inset-bottom))",
+            }}
           >
             <div className="flex items-center gap-2 border-b border-white/10 bg-emerald-950/50 px-4 py-3">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/20 ring-1 ring-emerald-400/40">
@@ -141,7 +149,7 @@ export function AgentWidget() {
 
             <div
               ref={listRef}
-              className="flex-1 space-y-3 overflow-y-auto px-4 py-3"
+              className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-4 py-3 [-webkit-overflow-scrolling:touch]"
             >
               {messages.map((m) => (
                 <div
@@ -197,12 +205,13 @@ export function AgentWidget() {
                   }}
                   rows={1}
                   placeholder="Ask about ReVolt…"
-                  className="max-h-28 min-h-[42px] flex-1 resize-none rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none placeholder:text-gray-500 focus:border-emerald-500/40"
+                  enterKeyHint="send"
+                  className="max-h-28 min-h-12 flex-1 resize-none rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-base text-white outline-none placeholder:text-gray-500 focus:border-emerald-500/40 sm:text-sm"
                 />
                 <button
                   type="submit"
                   disabled={loading || !input.trim()}
-                  className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-2xl bg-emerald-500 text-navy-950 transition hover:bg-emerald-400 disabled:opacity-40"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-500 text-navy-950 transition hover:bg-emerald-400 disabled:opacity-40"
                   aria-label="Send"
                 >
                   <Send className="h-4 w-4" />

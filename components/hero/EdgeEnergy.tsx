@@ -95,8 +95,11 @@ export function EdgeEnergy() {
     let my = typeof window !== "undefined" ? window.innerHeight * 0.5 : 0;
     let hasMouse = false;
 
+    const isMobile = () => window.innerWidth < 768;
+
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Lower DPR on phones for smoother scroll
+      dpr = Math.min(window.devicePixelRatio || 1, isMobile() ? 1.25 : 2);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
@@ -120,8 +123,9 @@ export function EdgeEnergy() {
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onPointer, { passive: true });
 
-    // Seed (~50% fewer particles)
-    for (let i = 0; i < 24; i++) {
+    // Seed — fewer particles on mobile
+    const seedCount = isMobile() ? 12 : 24;
+    for (let i = 0; i < seedCount; i++) {
       const p = spawnFromEdge(w, h, mx, my);
       p.life = Math.random() * p.maxLife;
       particles.push(p);
@@ -136,11 +140,13 @@ export function EdgeEnergy() {
       drawEdgeFlare(ctx, w * 0.5, 0, 0, 1, h * 0.22); // top
       drawEdgeFlare(ctx, w * 0.5, h, 0, -1, h * 0.22); // bottom
 
-      // Spawn (~50% fewer) :  aimed at current mouse position
-      if (particles.length < 45 && Math.random() < 0.14) {
+      // Spawn — aimed at pointer; lighter on phones
+      const maxParticles = isMobile() ? 22 : 45;
+      const spawnChance = isMobile() ? 0.08 : 0.14;
+      if (particles.length < maxParticles && Math.random() < spawnChance) {
         particles.push(spawnFromEdge(w, h, mx, my));
       }
-      if (Math.random() < 0.03) {
+      if (!isMobile() && Math.random() < 0.03) {
         particles.push(spawnFromEdge(w, h, mx, my));
       }
 
