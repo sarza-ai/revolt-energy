@@ -29,13 +29,13 @@ const items = [
 /** Advantage as stacked feature rows (not a 4-up card grid). */
 export function Advantage() {
   return (
-    <section id="advantage" className="bg-[#111811] px-6 py-24">
+    <section id="advantage" className="bg-[#111811] px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-5xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-4 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl"
+          className="mb-3 text-center text-3xl font-bold tracking-tight text-white sm:mb-4 sm:text-4xl md:text-5xl"
         >
           The ReVolt Advantage
         </motion.h2>
@@ -43,13 +43,13 @@ export function Advantage() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mx-auto mb-14 max-w-2xl text-center text-gray-400"
+          className="mx-auto mb-8 max-w-2xl text-center text-sm text-gray-400 sm:mb-14 sm:text-base"
         >
           Why decentralised, modular infrastructure wins for hosts, partners and
           the grid.
         </motion.p>
 
-        <div className="divide-y divide-white/10 rounded-3xl border border-white/10 bg-white/[0.03]">
+        <div className="divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.03] sm:rounded-3xl">
           {items.map((item, i) => {
             const Icon = item.icon;
             const reverse = i % 2 === 1;
@@ -60,12 +60,12 @@ export function Advantage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className={`flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:gap-8 sm:p-8 ${
+                className={`flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:gap-8 sm:p-8 ${
                   reverse ? "sm:flex-row-reverse" : ""
                 }`}
               >
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/10 ring-1 ring-emerald-500/30">
-                  <Icon className="h-8 w-8 text-emerald-400" />
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/10 ring-1 ring-emerald-500/30 sm:h-16 sm:w-16">
+                  <Icon className="h-7 w-7 text-emerald-400 sm:h-8 sm:w-8" />
                 </div>
                 <div className={reverse ? "sm:text-right" : undefined}>
                   <h3 className="text-xl font-semibold text-white sm:text-2xl">

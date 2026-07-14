@@ -11,7 +11,7 @@ export function SolutionsHorizontal() {
   return (
     <section
       id="solutions"
-      className="relative overflow-hidden bg-navy-900/50 py-20 sm:py-28"
+      className="relative overflow-hidden bg-navy-900/50 py-14 sm:py-20 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0 energy-grid opacity-40" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -21,7 +21,7 @@ export function SolutionsHorizontal() {
           body="Generation, storage, trading, and the AI orchestration layer that binds them, one suite for Australia's edge."
         />
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-6">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:mt-16 lg:grid-cols-4 lg:gap-6">
           {solutions.map((sol, i) => (
             <motion.article
               key={sol.id}
@@ -29,7 +29,7 @@ export function SolutionsHorizontal() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass charge-border relative flex h-full flex-col rounded-3xl p-6 sm:p-7"
+              className="glass charge-border relative flex h-full flex-col rounded-2xl p-5 sm:rounded-3xl sm:p-7"
             >
               <span className="font-mono text-sm text-electric/70">
                 {sol.eyebrow}

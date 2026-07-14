@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/Button";
 
 export function DualCta() {
   return (
-    <section id="contact" className="relative bg-[#0a0f0a] py-20 sm:py-28">
+    <section id="contact" className="relative bg-[#0a0f0a] py-14 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl border border-electric/30 bg-gradient-to-br from-electric/15 via-navy-800 to-navy-900 p-8 sm:p-10"
+            className="relative overflow-hidden rounded-2xl border border-electric/30 bg-gradient-to-br from-electric/15 via-navy-800 to-navy-900 p-6 sm:rounded-3xl sm:p-10"
           >
             <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-electric/20 blur-3xl" />
             <Building2 className="h-8 w-8 text-electric" />
@@ -25,7 +25,7 @@ export function DualCta() {
               ReVolt to turn underutilised sites into productive infrastructure
               that accelerates Australia&apos;s transition.
             </p>
-            <Button href="/contact?path=partner" className="mt-8">
+            <Button href="/contact?path=partner" className="mt-6 sm:mt-8">
               Start partner inquiry
             </Button>
           </motion.div>
@@ -34,7 +34,7 @@ export function DualCta() {
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl border border-border glass p-8 sm:p-10"
+            className="relative overflow-hidden rounded-2xl border border-border glass p-6 sm:rounded-3xl sm:p-10"
           >
             <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-green-400/10 blur-3xl" />
             <LineChart className="h-8 w-8 text-green-400" />
@@ -46,7 +46,7 @@ export function DualCta() {
               revenue-generating, backed by generation, trading pathways and an
               AI orchestration layer.
             </p>
-            <Button href="/contact?path=investor" variant="secondary" className="mt-8">
+            <Button href="/contact?path=investor" variant="secondary" className="mt-6 sm:mt-8">
               Investor relations
             </Button>
           </motion.div>

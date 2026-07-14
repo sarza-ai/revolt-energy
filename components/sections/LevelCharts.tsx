@@ -376,7 +376,7 @@ export function LevelCharts() {
     <section
       ref={sectionRef}
       id="growth"
-      className="relative bg-[#0a0f0a] py-24 sm:py-28"
+      className="relative bg-[#0a0f0a] py-14 sm:py-20 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(16,185,129,0.08),transparent_55%)]" />
 

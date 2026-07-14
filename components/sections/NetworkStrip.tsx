@@ -10,7 +10,7 @@ export function NetworkStrip() {
   const totalMw = networkNodes.reduce((s, n) => s + n.mw, 0);
 
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32">
+    <section className="relative overflow-hidden py-14 sm:py-20 lg:py-28">
       {/* Static constellation only — no background motion */}
       <ConstellationBg />
 
@@ -25,7 +25,7 @@ export function NetworkStrip() {
           />
         </div>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
           {[
             { label: "Live nodes", value: String(live) },
             { label: "Illustrative capacity", value: `${totalMw} MW` },

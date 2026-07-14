@@ -86,19 +86,18 @@ body {
 }
 
 /*
- * Hero nodule sizing (2× prior mobile size)
- * Mobile: large ambient orb; still not full-bleed
- * Do NOT use inset-0 on the frame on phones (that caused full-screen stretch)
+ * Mobile hero nodule — in document flow, high under nav.
+ * Wide enough to feel premium; not full-screen (that caused blank voids).
  */
-.hero-nodule-frame {
+.hero-nodule-frame,
+.hero-nodule-frame-mobile {
   position: relative;
   flex-shrink: 0;
-  width: 336px;
-  height: 336px;
-  max-width: 88vw;
-  max-height: 88vw;
-  opacity: 0.62;
+  width: min(280px, 72vw);
+  height: min(280px, 72vw);
+  opacity: 0.95;
   overflow: hidden;
+  margin-inline: auto;
 }
 
 .hero-nodule-canvas,
@@ -111,70 +110,23 @@ body {
 }
 
 @media (min-width: 400px) {
-  .hero-nodule-frame {
-    width: 380px;
-    height: 380px;
-    opacity: 0.66;
+  .hero-nodule-frame-mobile {
+    width: min(300px, 68vw);
+    height: min(300px, 68vw);
   }
 }
 
 @media (min-width: 640px) {
-  .hero-nodule-frame {
-    width: 440px;
-    height: 440px;
-    max-width: 72vw;
-    max-height: 72vw;
-    opacity: 0.72;
+  .hero-nodule-frame-mobile {
+    width: min(320px, 50vw);
+    height: min(320px, 50vw);
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  .hero-nodule-frame {
-    width: 520px;
-    height: 520px;
-    max-width: 64vw;
-    max-height: 64vw;
-    opacity: 0.78;
-  }
-}
-
-/*
- * Desktop cinematic full-bleed ONLY with fine pointer (mouse),
- * so Android "desktop site" / landscape still keeps a bounded orb.
- */
-@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-  .hero-nodule-frame {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    opacity: 1;
-    overflow: visible;
-  }
-}
-
-/* Touch devices: 2× prior caps, still never full-bleed */
-@media (pointer: coarse) {
-  .hero-nodule-frame {
-    width: min(400px, 88vw) !important;
-    height: min(400px, 88vw) !important;
-    max-width: 400px !important;
-    max-height: 400px !important;
-    opacity: 0.66 !important;
-    position: relative !important;
-    inset: auto !important;
-  }
-}
-
-@media (pointer: coarse) and (min-width: 640px) {
-  .hero-nodule-frame {
-    width: min(480px, 78vw) !important;
-    height: min(480px, 78vw) !important;
-    max-width: 480px !important;
-    max-height: 480px !important;
-    opacity: 0.74 !important;
+  .hero-nodule-frame-mobile {
+    width: min(340px, 42vw);
+    height: min(340px, 42vw);
   }
 }
 
