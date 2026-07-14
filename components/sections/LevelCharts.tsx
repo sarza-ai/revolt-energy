@@ -376,7 +376,7 @@ export function LevelCharts() {
     <section
       ref={sectionRef}
       id="growth"
-      className="relative bg-[#0a0f0a] py-14 sm:py-20 lg:py-28"
+      className="relative bg-[#0a0f0a] py-10 sm:py-16 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(16,185,129,0.08),transparent_55%)]" />
 
@@ -387,24 +387,26 @@ export function LevelCharts() {
           body="A potential multi-year build-out for a decentralised BESS network across Australia: capacity, node count and commercial intensity from foundation sites to a mature national mesh."
         />
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
           {milestones.map((m, i) => (
             <motion.div
               key={m.year}
               initial={{ opacity: 0, y: 16 }}
               animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ delay: i * 0.08 }}
-              className="rounded-2xl border border-emerald-500/15 bg-emerald-950/30 p-4"
+              className="rounded-xl border border-emerald-500/15 bg-emerald-950/30 p-3 sm:rounded-2xl sm:p-4"
             >
-              <p className="font-mono text-sm font-semibold text-emerald-400">
+              <p className="font-mono text-xs font-semibold text-emerald-400 sm:text-sm">
                 {m.year}
               </p>
-              <p className="mt-2 text-xs leading-relaxed text-gray-400">{m.text}</p>
+              <p className="mt-1.5 text-[11px] leading-relaxed text-gray-400 sm:mt-2 sm:text-xs">
+                {m.text}
+              </p>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
+        <div className="mt-6 grid gap-3 sm:mt-10 sm:gap-5 lg:grid-cols-2">
           <LevelLineChart
             id="capacity"
             values={capacitySeries}

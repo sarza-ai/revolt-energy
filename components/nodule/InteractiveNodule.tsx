@@ -234,12 +234,12 @@ export function InteractiveNodule({
     };
   }, [mode]);
 
-  // Smaller mesh when hero is in a constrained mobile box
+  // Full-bleed desktop hero mesh; float mode fills the mobile frame tightly
   const meshScale = mode === "full" && narrow ? 0.72 : 1;
 
-  // Always keep the sphere fitting the canvas; smaller on float (mobile hero)
+  // Float (mobile hero): fill the frame so the orb reads large on phones
   const effectiveScale =
-    mode === "float" ? (narrow ? 0.75 : 0.85) : meshScale;
+    mode === "float" ? (narrow ? 0.92 : 0.88) : meshScale;
 
   return (
     <div

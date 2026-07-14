@@ -23,6 +23,7 @@ type Props = {
   disabled?: boolean;
 };
 
+/** Mobile-first: 48px min tap target, full-width friendly. */
 export function Button({
   href,
   children,
@@ -33,7 +34,7 @@ export function Button({
   disabled,
 }: Props) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 charge-border",
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold tracking-wide transition-all duration-300 charge-border active:scale-[0.98] sm:text-sm",
     variants[variant],
     disabled && "opacity-50 pointer-events-none",
     className,

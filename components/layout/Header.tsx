@@ -42,7 +42,7 @@ export function Header() {
         scrolled && "shadow-[0_8px_40px_rgba(0,0,0,0.35)]",
       )}
     >
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-4 sm:h-16 sm:gap-3 sm:px-6">
         <Logo variant="full" className="min-w-0 shrink" />
 
         <div className="hidden items-center gap-5 text-sm font-medium text-white lg:flex xl:gap-7">
@@ -64,27 +64,36 @@ export function Header() {
           Get In Touch
         </Link>
 
-        <button
-          type="button"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-white lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Phone: compact CTA + menu (most visits start here) */}
+        <div className="flex items-center gap-1.5 lg:hidden">
+          <Link
+            href="/contact"
+            className="inline-flex min-h-10 items-center rounded-full bg-white px-3.5 py-2 text-xs font-semibold text-black active:scale-[0.98] sm:px-4 sm:text-sm"
+          >
+            Contact
+          </Link>
+          <button
+            type="button"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-white"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
-      {/* Full-screen mobile / tablet drawer (was broken between md–lg) */}
+      {/* Mobile / tablet full-height menu */}
       {open && (
         <div className="fixed inset-x-0 bottom-0 top-14 z-50 flex flex-col border-t border-white/10 bg-[#0a0f0a]/98 backdrop-blur-xl sm:top-16 lg:hidden pb-safe">
-          <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6">
+          <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-0.5 overflow-y-auto overscroll-contain px-4 py-3 sm:px-6 sm:py-4">
             {links.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex min-h-12 items-center rounded-xl px-3 text-base font-medium text-white hover:bg-white/5 hover:text-emerald-400"
+                className="flex min-h-12 items-center rounded-xl px-3 text-base font-medium text-white active:bg-white/5 hover:bg-white/5 hover:text-emerald-400"
               >
                 {item.label}
               </Link>
@@ -92,21 +101,21 @@ export function Header() {
             <Link
               href="/about"
               onClick={() => setOpen(false)}
-              className="flex min-h-12 items-center rounded-xl px-3 text-base text-muted hover:bg-white/5 hover:text-emerald-400"
+              className="flex min-h-12 items-center rounded-xl px-3 text-base text-muted active:bg-white/5 hover:bg-white/5 hover:text-emerald-400"
             >
               About
             </Link>
             <Link
               href="/blog"
               onClick={() => setOpen(false)}
-              className="flex min-h-12 items-center rounded-xl px-3 text-base text-muted hover:bg-white/5 hover:text-emerald-400"
+              className="flex min-h-12 items-center rounded-xl px-3 text-base text-muted active:bg-white/5 hover:bg-white/5 hover:text-emerald-400"
             >
               Insights
             </Link>
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="mt-4 flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-center text-base font-semibold text-black"
+              className="mt-3 flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-center text-base font-semibold text-black active:scale-[0.98]"
             >
               Get In Touch
             </Link>
