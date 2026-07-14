@@ -88,17 +88,11 @@ export function Hero() {
           transition={{ duration: 0.55, delay: 0.12 }}
           className="w-full"
         >
-          <p className="mx-auto mb-5 max-w-[22rem] text-[0.95rem] leading-snug text-gray-300 sm:mb-8 sm:max-w-2xl sm:text-lg sm:leading-relaxed md:text-xl">
-            <span className="sm:hidden">
-              Decentralised BESS infrastructure. Clean power generated, stored
-              and monetised at the edge.
-            </span>
-            <span className="hidden sm:inline">
-              ReVolt Energy builds, owns and operates scalable, decentralised
-              energy infrastructure, with battery energy storage at its core,
-              enabling clean power to be generated, stored, and monetised at the
-              edge.
-            </span>
+          <p className="mx-auto mb-5 max-w-xl text-[0.95rem] leading-snug text-gray-300 sm:mb-8 sm:max-w-2xl sm:text-lg sm:leading-relaxed md:text-xl">
+            ReVolt Energy builds, owns and operates scalable, decentralised
+            energy infrastructure, with battery energy storage at its core,
+            enabling clean power to be generated, stored, and monetised at the
+            edge.
           </p>
 
           <div className="pointer-events-auto mx-auto flex w-full flex-col gap-2.5 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
