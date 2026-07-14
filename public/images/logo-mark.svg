@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ReVolt mark: original battery+orbit concept, site emerald/teal theme -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="ReVolt">
+  <defs>
+    <linearGradient id="orbit" x1="8" y1="10" x2="56" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6ee7b7"/>
+      <stop offset="0.45" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="orbit2" x1="50" y1="8" x2="12" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Orbital swooshes (from original ReVolt logo) -->
+  <path
+    d="M48.5 16.5 C54 23.5 55.5 33 51.5 41.5 C47.5 50 38.5 55.5 28.5 55 C22 54.6 16.5 52 12.5 47.5"
+    stroke="url(#orbit)"
+    stroke-width="4.2"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <path
+    d="M15.5 47.5 C10 40.5 8.5 31 12.5 22.5 C16.5 14 25.5 8.5 35.5 9 C42 9.4 47.5 12 51.5 16.5"
+    stroke="url(#orbit2)"
+    stroke-width="4.2"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.95"
+  />
+
+  <!-- Battery body -->
+  <rect x="23" y="20" width="18" height="26" rx="2.5" stroke="#ecfdf5" stroke-width="2.4" fill="none"/>
+  <!-- Battery terminal -->
+  <rect x="28.5" y="16" width="7" height="4" rx="1.2" fill="#ecfdf5"/>
+  <!-- Lightning bolt -->
+  <path
+    d="M34.2 24.5 L28.8 34.2 H32.6 L30.2 43.5 L38.2 31.8 H33.8 L34.2 24.5 Z"
+    fill="#34d399"
+  />
+</svg>
