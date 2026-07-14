@@ -86,15 +86,16 @@ body {
 }
 
 /*
- * Mobile hero nodule frame (~30% larger than previous).
- * overflow:visible so the sphere edge/glow is never clipped.
+ * Mobile hero nodule — sizes with the viewport so the full hero fits
+ * on one screen (100dvh). Cap with dvh so short phones shrink the orb first.
+ * overflow:visible so sphere edges are never clipped.
  */
 .hero-nodule-frame,
 .hero-nodule-frame-mobile {
   position: relative;
-  flex-shrink: 0;
-  width: min(364px, 90vw);
-  height: min(364px, 90vw);
+  flex-shrink: 1;
+  width: min(300px, 72vw, 34dvh);
+  height: min(300px, 72vw, 34dvh);
   opacity: 1;
   overflow: visible;
   margin-inline: auto;
@@ -107,28 +108,35 @@ body {
   max-width: 100% !important;
   max-height: 100% !important;
   display: block;
-  /* Avoid subpixel crop on some Android GPUs */
   overflow: visible !important;
 }
 
-@media (min-width: 390px) {
+/* Taller phones can take a larger orb while still fitting one screen */
+@media (min-height: 740px) {
   .hero-nodule-frame-mobile {
-    width: min(390px, 88vw);
-    height: min(390px, 88vw);
+    width: min(340px, 78vw, 38dvh);
+    height: min(340px, 78vw, 38dvh);
+  }
+}
+
+@media (min-height: 840px) {
+  .hero-nodule-frame-mobile {
+    width: min(380px, 82vw, 40dvh);
+    height: min(380px, 82vw, 40dvh);
   }
 }
 
 @media (min-width: 640px) {
   .hero-nodule-frame-mobile {
-    width: min(416px, 58vw);
-    height: min(416px, 58vw);
+    width: min(360px, 48vw, 36dvh);
+    height: min(360px, 48vw, 36dvh);
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-nodule-frame-mobile {
-    width: min(442px, 52vw);
-    height: min(442px, 52vw);
+    width: min(400px, 44vw, 38dvh);
+    height: min(400px, 44vw, 38dvh);
   }
 }
 
