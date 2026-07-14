@@ -86,16 +86,15 @@ body {
 }
 
 /*
- * Mobile hero nodule frame.
+ * Mobile hero nodule frame (~30% larger than previous).
  * overflow:visible so the sphere edge/glow is never clipped.
- * Extra size gives the 3D orb breathing room inside the box.
  */
 .hero-nodule-frame,
 .hero-nodule-frame-mobile {
   position: relative;
   flex-shrink: 0;
-  width: min(280px, 78vw);
-  height: min(280px, 78vw);
+  width: min(364px, 90vw);
+  height: min(364px, 90vw);
   opacity: 1;
   overflow: visible;
   margin-inline: auto;
@@ -114,22 +113,22 @@ body {
 
 @media (min-width: 390px) {
   .hero-nodule-frame-mobile {
-    width: min(300px, 76vw);
-    height: min(300px, 76vw);
+    width: min(390px, 88vw);
+    height: min(390px, 88vw);
   }
 }
 
 @media (min-width: 640px) {
   .hero-nodule-frame-mobile {
-    width: min(320px, 52vw);
-    height: min(320px, 52vw);
+    width: min(416px, 58vw);
+    height: min(416px, 58vw);
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-nodule-frame-mobile {
-    width: min(340px, 44vw);
-    height: min(340px, 44vw);
+    width: min(442px, 52vw);
+    height: min(442px, 52vw);
   }
 }
 
