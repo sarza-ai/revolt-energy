@@ -89,7 +89,7 @@ export function Hero() {
           transition={{ duration: 0.55, delay: 0.12 }}
           className="w-full"
         >
-          <p className="mx-auto mb-5 max-w-xl text-[1.425rem] leading-snug text-gray-300 sm:mb-8 sm:max-w-2xl sm:text-lg sm:leading-relaxed md:text-xl">
+          <p className="mx-auto mb-5 max-w-xl text-[0.95rem] leading-snug text-gray-300 sm:mb-8 sm:max-w-2xl sm:text-lg sm:leading-relaxed md:text-xl">
             ReVolt Energy builds, owns and operates scalable, decentralised
             energy infrastructure, with battery energy storage at its core,
             enabling clean power to be generated, stored, and monetised at the
@@ -99,13 +99,13 @@ export function Hero() {
           <div className="pointer-events-auto mx-auto flex w-full flex-col gap-2.5 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
             <a
               href="#solutions"
-              className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-emerald-600 px-6 py-3.5 text-[1.5rem] font-semibold text-white shadow-[0_0_28px_rgba(16,185,129,0.35)] transition active:scale-[0.98] hover:bg-emerald-500 sm:w-auto sm:px-10 sm:text-lg"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-emerald-600 px-6 py-3.5 text-base font-semibold text-white shadow-[0_0_28px_rgba(16,185,129,0.35)] transition active:scale-[0.98] hover:bg-emerald-500 sm:w-auto sm:px-10 sm:text-lg"
             >
               See the Technology
             </a>
             <a
               href="/contact"
-              className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl border border-white/55 px-6 py-3.5 text-[1.5rem] font-semibold text-white transition active:scale-[0.98] hover:bg-white/10 sm:w-auto sm:px-10 sm:text-lg"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl border border-white/55 px-6 py-3.5 text-base font-semibold text-white transition active:scale-[0.98] hover:bg-white/10 sm:w-auto sm:px-10 sm:text-lg"
             >
               Join the ReVolt
             </a>
