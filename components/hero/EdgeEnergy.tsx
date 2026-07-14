@@ -123,8 +123,8 @@ export function EdgeEnergy() {
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onPointer, { passive: true });
 
-    // Mobile: half the energy particles of desktop (performance + clarity)
-    const seedCount = isMobile() ? 12 : 24;
+    // Seed: keep mobile energetic enough to read on phones
+    const seedCount = isMobile() ? 20 : 24;
     for (let i = 0; i < seedCount; i++) {
       const p = spawnFromEdge(w, h, mx, my);
       p.life = Math.random() * p.maxLife;
@@ -140,13 +140,13 @@ export function EdgeEnergy() {
       drawEdgeFlare(ctx, w * 0.5, 0, 0, 1, h * 0.22); // top
       drawEdgeFlare(ctx, w * 0.5, h, 0, -1, h * 0.22); // bottom
 
-      // Desktop keeps full density; mobile ~half
-      const maxParticles = isMobile() ? 22 : 45;
-      const spawnChance = isMobile() ? 0.07 : 0.14;
+      // Mobile denser for visibility; desktop full cinematic
+      const maxParticles = isMobile() ? 36 : 45;
+      const spawnChance = isMobile() ? 0.16 : 0.14;
       if (particles.length < maxParticles && Math.random() < spawnChance) {
         particles.push(spawnFromEdge(w, h, mx, my));
       }
-      if (!isMobile() && Math.random() < 0.03) {
+      if (Math.random() < (isMobile() ? 0.05 : 0.03)) {
         particles.push(spawnFromEdge(w, h, mx, my));
       }
 
