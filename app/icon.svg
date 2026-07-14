@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Favicon: same battery + orbit mark as site header logo -->
+<!-- Next.js app icon / favicon: battery + orbit, pure black inside green ring -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="ReVolt">
-  <circle cx="32" cy="32" r="32" fill="#0a0f0a"/>
+  <rect width="64" height="64" rx="12" fill="#000000"/>
+  <circle cx="32" cy="32" r="28" fill="#000000"/>
 
   <path
     d="M14 42 C10 34, 11 22, 20 15 C28 9, 40 9, 48 16"
@@ -18,7 +19,7 @@
     fill="none"
   />
 
-  <rect x="23.5" y="17" width="17" height="30" rx="2.5" stroke="#ecfdf5" stroke-width="2.5" fill="none"/>
+  <rect x="23.5" y="17" width="17" height="30" rx="2.5" stroke="#ecfdf5" stroke-width="2.5" fill="#000000"/>
   <rect x="28" y="13" width="8" height="5" rx="1.2" fill="#ecfdf5"/>
   <path
     d="M35 23.5 L28.2 34 H32.4 L30 43.5 L38.5 31.5 H34 L35 23.5 Z"

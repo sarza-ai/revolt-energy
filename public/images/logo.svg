@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 64" fill="none" role="img" aria-label="ReVolt Energy">
   <!-- Battery mark (same geometry as logo-mark.svg, scaled into left box) -->
   <g transform="translate(0 0)">
-    <circle cx="32" cy="32" r="31" fill="#0a0f0a"/>
+    <circle cx="32" cy="32" r="31" fill="#000000"/>
     <path
       d="M14 42 C10 34, 11 22, 20 15 C28 9, 40 9, 48 16"
       stroke="url(#logo-orbit-g)"
